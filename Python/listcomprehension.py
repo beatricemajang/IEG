@@ -1,8 +1,12 @@
 # deep copy
 fruits = ["apple", "orange", "mango", "banana", "grapes"]
-prices = [2.50, 3.29, 1, 8.45]
-overseafruits = fruits
-# you shouldn't actually do this
+prices = [1.60, 1.20, 2.20, 4.80, 6.20]
+
+# for loop with some statement
+for fruit in fruits:
+    print(fruit)
+
+# overseafruits = fruits # you shouldn't actually do this
 # overseafruits = fruits.copy()
 
 overseafruits = []
@@ -17,89 +21,117 @@ print(overseafruits)
 
 # using tuple comprehension
 overseafruits = (fruit for fruit in fruits)
-print(overseafruits)
+print(tuple(overseafruits))
 
 priceswithsst = []
 for price in prices:
-    priceswitsst = price + (price * 0.06)
-    priceswithsst.append(priceswitsst)
+    pricewithsst = price + (price * 0.06)
+    priceswithsst.append(pricewithsst)
 print(priceswithsst)
 
 # using list comprehension
 priceswithsst = [price + (price * 0.06) for price in prices]
 print(priceswithsst)
 
-# task which we need to do is to find pricewithsst
-# you need proce
+# using map class
+# task which we need to do is find pricewithsst
+# you need price
 # now using the above information create a function
 def calculateSST(price):
-    priceswithsst = price + (price * 0.06)
-    return priceswithsst
+    pricewithsst = price + (price * 0.06)
+    return pricewithsst
 
-# this map function takes 2 parameter
-# 1st parameter is the function and 2nd paramete is the list
+# this map function takes 2 parameters
+# 1st parameter is the function and second parameter is the list
 priceswithsst = map(calculateSST, prices)
+print(list(priceswithsst))
 
-# what map does?
-# inside map there is a loop which pulls out the price from proices
-# and pass the price to our function. Our function return the price with sst
-# now map append this return value inside a list
+# what map does ?
+# Inside map there is a for loop which pulls out the price from prices
+# and pass the price to our function. Our function return the price with sst.
+# Now map append this return value inside a list
 # finally once all the prices are iterated the map function returns the list
-
+# def map(func, values):
+#    result = []
+#    for value in values:
+#        result.append(func(value))
+#    return result
 
 fahrenheitvalues = [32, 33, 34, 35, 36, 37, 38, 39, 40]
 celsiusvalues = []
 for fahrenheitvalue in fahrenheitvalues:
-    celsiusvalue = (fahrenheitvalue - 32) * 5 / 9
+    celsiusvalue = (fahrenheitvalue - 32) * 5/9
     celsiusvalues.append(celsiusvalue)
 print(celsiusvalues)
 
-celsiusvalues = [(fahrenheitvalue - 32) * 5 / 9 for fahrenheitvalue in fahrenheitvalues]
+# using list comprehension
+celsiusvalues = [(fahrenheitvalue - 32) * 5/9 for fahrenheitvalue in fahrenheitvalues]
 print(celsiusvalues)
 
-# all the three above examples are trying to create a new list
-# the number of items in oth list are same
-# instead of writting the traditionally for loops
-# you can use something called list comprehension
+# using map class
+def fahrenheitToCelsius(fahrenheitvalue):
+    return (fahrenheitvalue - 32) * 5/9
+celsiusvalues = map(fahrenheitToCelsius, fahrenheitvalues)
+print(list(celsiusvalues))
 
-multiplesoftthree = []
+# in all the above three examples we are trying to create a new list
+# the number of items in both list are same
+# Instead of writing the traditionaly for loops 
+# you can use something called list comprehension or map class
+
+multiplesofthree = []
 for number in range(1, 50): # list of 50 items
     if (number % 3 == 0):
-        multiplesoftthree.append(number)
-multiplesoftthree = [number for number in range(1, 50) if number % 3 == 0]
+        multiplesofthree.append(number)
+print(multiplesofthree)
 
-# new_list = [expression for number in numbers condition]
+# using list comprehension
+multiplesofthree = [number for number in range(1, 50) if (number % 3 == 0)]
+print(multiplesofthree)
+
+# using filter class
+def findMultiplesOfThree(number):
+    return True if (number % 3 == 0) else False
+        
+multiplesofthree = filter(findMultiplesOfThree, range(1, 50))
+print(list(multiplesofthree))
 
 numbers = [2, 5, 7, 3, 4, 6, 10, 11, 15, 17, 24, 22]
-oddnumber = []
+oddnumbers = []
 for number in numbers:
-    if number % 2 != 0:
-        oddnumber.append(number)
+    if (number % 2 != 0):
+        oddnumbers.append(number)
+print(oddnumbers)
 
+# using list comprehension
+oddnumbers = [number for number in numbers if (number % 2 != 0)]
+print(oddnumbers)
 
+# using filter class
+def isOddNumber(number):
+    return True if (number % 2 != 0) else False
 
-# all the abovw two examples are trying to create a new list
+oddnumbers = filter(isOddNumber, numbers)
+print(list(oddnumbers))
+
+# all the above two examples are trying to create a new list
 # the number of items in the created list is less than or equals to original list
-'''
+# Instead of writing the traditionaly for loops 
+# you can use something called list comprehension or filter class
+
 sum = 0
 for number in range(1, 11):
     sum = sum + number
+print("Sum:", sum)
 
 mean = 0
 for number in range(1, 11):
     mean = mean + number
-mean = mean /len(range(1, 11))
-'''
+mean = mean / len(range(1, 11))
+print("Mean:", mean)
 
-num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-mul = []
-for i in num:
-    i *= 2
-    mul.append(i)
-print(mul)
+# in the above 2 examples we are trying to reduce the list to a single value
 
-mul = [i * 2 for i in num]
-print(mul)
 
 # reduce is not a built in function
 # it is inside a module called functools
@@ -111,21 +143,24 @@ def findTotal(oldvalue, currentvalue):
     return oldvalue + currentvalue
 
 print(reduce(findTotal, numbers))
-# reduce function takes another funtion as first parameter
+
+# reduce function takes another fuction as frist parameter
 # that function suppose to take 2 parameter
 # reduce function takes list as second parameter
-
+"""
 def reduce(func, numbers):
-    sum = 0
+    sum = 0 
+    # however the original reduce function is smart 
+    # it will initialize the sum variable with 1 if you use multiplication
     for number in numbers:
         sum = func(sum, number)
     return sum
+"""
 
-def factorial(oldvalue, currentvalue):
-    return oldvalue * currentvalue
+def factorial(oldvalue, currenvalue):
+    return oldvalue * currenvalue
 
 print(reduce(factorial, numbers))
 
-
-
-
+# now we are initializing the sum variable with 5
+print(reduce(factorial, numbers, 5))
