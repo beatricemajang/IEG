@@ -1,0 +1,5 @@
+Product|Quantity|Price
+television|2|4509.99
+Radio|5|5800.0
+Earbud|5|363278.0
+Dummy|0|0.0

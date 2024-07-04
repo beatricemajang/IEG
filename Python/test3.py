@@ -1,18 +1,11 @@
-num_items = int(input("Enter the Armstrong numbers that you want to generate: "))
+num_1 = int(input(""))
+num_2 = int(input(""))
 
-armStrong = []
-number = 0
-
-while len(armStrong) < num_items:
-    digits = list(map(int, str(number)))
-    num_digits = len(str(number))
-    total = 0
-    for digit in digits:
-        sum_of_power = digit ** num_digits
-        total += sum_of_power
-
-if number == total:
-    armStrong.append(number)
-number += 1
-
-print(f"The first {num_items} list of ADAM numbers are {armStrong}")
+for num in range(num_1, num_2 + 1):
+    isPrime = True
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            isPrime = False
+            break
+    if isPrime:
+        print(num, end=' ')
