@@ -1,39 +1,11 @@
-# Write a simple Python function that takes a number(n) as a parameter
-# display this:
-#        1
-#       1 1
-#      1 2 1
-#     1 3 3 1
-#    1 4 6 4 1
-#   1 5 10 10 5 1
-#  1 6 15 20 15 6 1
-# 1 7 21 35 35 21 7 1
+import pandas as pd
 
-def Pascal(n) :
-    pascal = {}
-    for line in range(0, n) :
-        listinrow = []
-        for i in range(0, line + 1) :
-            listinrow.append(str(binomialCoeff(line,i)))
-        pascal[line] = listinrow
-    Pascal_Dict_to_List(pascal)
+csv_file_path = 'iris.csv'
+column_names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species_type']
+df = pd.read_csv(csv_file_path, header=None, names=column_names)
+df = df.drop(1)
 
-def Pascal_Dict_to_List(pascaldict):
-    width = len(pascaldict) *3
-    for i in range(0, len(pascaldict)):
-        my_string = ' '.join(pascaldict[i])
-        padding = " " * ((width - len(my_string)) // 2)
-        print(f"{padding}{my_string}{padding}")
-
-def binomialCoeff(n, k) :
-    res = 1
-    if (k > n - k) :
-        k = n - k
-    for i in range(0 , k) :
-        res = res * (n - i)
-        res = res // (i + 1)
-    return res
-
-n = int(input("Enter number of rows:"))
-Pascal(n)
-
+# Print the DataFrame with custom index starting from 0
+print("sepal_length  sepal_width  petal_length  petal_width    species_type")
+for idx, row in df.reset_index(drop=True).iterrows():
+    print(f"{idx:<5}{row['sepal_length']:<13}{row['sepal_width']:<13}{row['petal_length']:<13}{row['petal_width']:<13}{row['species_type']}")

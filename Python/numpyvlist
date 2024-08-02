@@ -1,0 +1,11 @@
+import time
+import numpy as np
+
+size = 10000000
+lista = range(0, size)
+listb = range(0, size)
+numpya = np.range(0, size)
+numpyb = np.range(0, size)
+
+starttime = time.time()
+c = [x + y for x, y in zip(lista, listb)]
